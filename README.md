@@ -1,24 +1,46 @@
-cat > README.md << 'EOF'
 # ludamus-skills
 
-Claude skill for managing RPG game sessions in [Ludamus](https://github.com/fancysnake/ludamus) (zagrajmy.net).
+A [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code/skills) for managing RPG game sessions on [zagrajmy.net](https://zagrajmy.net) (Ludamus), a Django-based convention event app.
+
+Since Ludamus has no REST API yet, the skill operates via browser automation (Playwright / agent-browser).
 
 ## Install
-```
+
+```sh
 npx skills add https://github.com/Immordal/ludamus-skills
 ```
 
-## What it does
+## What it can do
 
-- Browse sessions at events
-- Sign up / drop out of sessions
-- Find games from your local PDF collection
-- Help write session pitches
-- Submit session proposals
-- Manage encounters (personal meetups)
-- Edit profile
+| Capability | Example prompt |
+|---|---|
+| Browse sessions | "What sessions are available at O2F?" |
+| Sign up / join waitlist | "Sign me up for the Call of Cthulhu session" |
+| Drop out | "Cancel my spot in the afternoon slot" |
+| Write a session pitch | "Help me write a pitch for running Delta Green" |
+| Propose a session | "I want to propose a session for O2F" |
+| Manage encounters | "Create a side game meetup for Saturday evening" |
+| Edit profile | "Show my profile" / "Update my connected users" |
 
-## Status
+When writing pitches, the skill can read local PDF game books to pull in scenario hooks, tone, player count, and content warnings automatically.
 
-Browser automation (Playwright / agent-browser) — no API yet. Will be updated when JSON API becomes available.
-EOF
+## Supported environments
+
+| Environment | Base URL |
+|---|---|
+| Production | `https://zagrajmy.net` |
+| Event subdomain | `https://<event>.zagrajmy.net` |
+| Local dev | `http://localhost:8000` |
+
+## Authentication
+
+The app uses Auth0. If you're not logged in, the skill will prompt you to log in via the browser before performing any write action.
+
+## Notes
+
+- Works on any event hosted on zagrajmy.net — just tell the skill the event name or paste a URL.
+- Browser automation will be replaced with direct API calls once an API is available; user-facing behavior will stay the same.
+
+## License
+
+MIT
