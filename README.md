@@ -2,7 +2,7 @@
 
 A [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code/skills) for managing RPG game sessions on [zagrajmy.net](https://zagrajmy.net) (Ludamus), a Django-based convention event app.
 
-Since Ludamus has no REST API yet, the skill operates via browser automation (Playwright / agent-browser).
+Since Ludamus has no REST API yet, the skill operates via direct HTTP requests — scraping CSRF tokens from rendered forms and posting form data. Once an API exists, the skill will switch to JSON calls; user-facing behavior stays the same.
 
 ## Install
 
@@ -39,7 +39,7 @@ The app uses Auth0. If you're not logged in, the skill will prompt you to log in
 ## Notes
 
 - Works on any event hosted on zagrajmy.net — just tell the skill the event name or paste a URL.
-- Browser automation will be replaced with direct API calls once an API is available; user-facing behavior will stay the same.
+- Direct HTTP calls will be replaced with JSON API calls once an API is available; user-facing behavior will stay the same.
 
 ## License
 
